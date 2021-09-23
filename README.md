@@ -1,31 +1,105 @@
+# Sensors: accelerometer
 
-> Open this page at [https://craftandcode.github.io/sensors-accelerometer/](https://craftandcode.github.io/sensors-accelerometer/)
+```package
+core
+radio
+microphone
+```
 
-## Use as Extension
+```template
+basic.forever(function () {
+	
+})
+```
 
-This repository can be added as an **extension** in MakeCode.
+```blocks
+basic.forever(function () {
+	
+})
+```
+## Step 0 @showDialog
+Hello! Today we'll learn how to measure movement with Micro:bit.
+## Step 1
+### Accelerometer
+An accelerometer is a motion sensor that can tell you the acceleration or movement of Micro:bit. 
+To learn more about it, watch [this video](https://youtu.be/UT35ODxvmS0).
+## Step 2 @showHint
+### Accelerometer
+All the code blocks for sensors are located inside the ``||input.input||`` category of your toolbox. To detect movement, let's add an ``||input.on gesture||`` block to our code.
+As you see, this block is the same shape as the ``||basic.forever||`` block, so it is also used to start a program.
+```hint
+It looks like this:
+```
+```blocks
+input.onGesture(Gesture.Shake, function () {
+	
+})
+```
+## Step 3 @showHint
+### Let's make a dice!
+The ``||input.on gesture||`` block allows you to choose one of 11 gestures to start your program. We'll make Micro:bit into a dice that shows a random number on shake. Assemble the code as shown and try shaking your Micro:bit!
 
-* open [https://makecode.microbit.org/](https://makecode.microbit.org/)
-* click on **New Project**
-* click on **Extensions** under the gearwheel menu
-* search for **https://github.com/craftandcode/sensors-accelerometer** and import
+```blocks
+input.onGesture(Gesture.Shake, function () {
+    basic.showNumber(randint(1, 6))
+})
+```
+## Step 4 @showDialog
+### What are the gestures?
+As you already know, the `shake` gesture happens when you shake the device.
+- `screen up`, `screen down`, `logo up`, `logo down`, `tilt left` and `tilt right` refer to the different orientations of Micro:bit.
+- `free fall` happens when your device is being dropped down.
+- `3g`, `6g` and `8g` are the levels of acceleration. These gestures happen when you move the device fast enough.
 
-## Edit this project ![Build status badge](https://github.com/craftandcode/sensors-accelerometer/workflows/MakeCode/badge.svg)
 
-To edit this repository in MakeCode.
+## Step 5 @showHint
+### A turning face
+You can add different programs to start on different gestures. Let's do it to make a face that turns upside down when we turn the Micro:bit upside down. Download the code to your Micro:bit and try flipping it! 
+```blocks
+input.onGesture(Gesture.LogoUp, function () {
+    basic.showLeds(`
+        . . . . .
+        . # . # .
+        . . . . .
+        # . . . #
+        . # # # .
+        `)
+})
+input.onGesture(Gesture.LogoDown, function () {
+    basic.showLeds(`
+        . # # # .
+        # . . . #
+        . . . . .
+        . # . # .
+        . . . . .
+        `)
+})
+```
 
-* open [https://makecode.microbit.org/](https://makecode.microbit.org/)
-* click on **Import** then click on **Import URL**
-* paste **https://github.com/craftandcode/sensors-accelerometer** and click import
+## Step 6
+### Now it's your turn!
+There's a challenge for you! Use the ``||input.on gesture||`` block to make an earth pointer that displays the arrow that points towards the ground no matter the orientation of the Micro:bit.
+```hint
+The earth pointer in action:
+```
+![](https://raw.githubusercontent.com/CraftAndCode/mood-badge/master/earthpointer.gif)
 
-## Blocks preview
 
-This image shows the blocks code from the last commit in master.
-This image may take a few minutes to refresh.
-
-![A rendered view of the blocks](https://github.com/craftandcode/sensors-accelerometer/raw/master/.github/makecode/blocks.png)
-
-#### Metadata (used for search, rendering)
-
-* for PXT/microbit
-<script src="https://makecode.com/gh-pages-embed.js"></script><script>makeCodeRender("{{ site.makecode.home_url }}", "{{ site.github.owner_name }}/{{ site.github.repository_name }}");</script>
+## Step 7 @showDialog
+### Answer: Earth pointer
+```blocks
+input.onGesture(Gesture.LogoUp, function () {
+    basic.showArrow(ArrowNames.South)
+})
+input.onGesture(Gesture.TiltLeft, function () {
+    basic.showArrow(ArrowNames.West)
+})
+input.onGesture(Gesture.TiltRight, function () {
+    basic.showArrow(ArrowNames.East)
+})
+input.onGesture(Gesture.LogoDown, function () {
+    basic.showArrow(ArrowNames.North)
+})
+```
+## Step 8
+Congratulations, this lesson is finished! Now you know how to track the motion and orientation of Micro:bit! 
